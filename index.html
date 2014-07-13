@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="uc">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,66 +19,57 @@
         <script type="text/javascript" src="app.js"></script>
 
   </head>
-  <body>
+  <body class="container">
 
   
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Convert:</a>
+  <nav class="navbar navbar-default" role="navigation" ng-controller="PanelController as panel">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Convert:</a>
+      </div>
+  
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li ng-class="{active:tab === 0}"><a href ng-click="tab = 0">Length</a></li>
+          <li ng-class="{active:tab === 1}"><a href ng-click="tab = 1">Area</a></li>
+          <li ng-class="{active:tab === 2}"><a href ng-click="tab = 2">Volume</a></li>
+          <li ng-class="{active:tab === 3}"><a href ng-click="tab = 3">Pressure</a></li>
+          <li ng-class="{active:tab === 4}"><a href ng-click="tab = 4">Flow</a></li>
+          <li ng-class="{active:tab === 5}"><a href ng-click="tab = 5">Temperature</a></li>
+          <li ng-class="{active:tab === 6}"><a href ng-click="tab = 6">Currency</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <div class="container-fluid" ng-show="tab === 0">
+    <div class="row">    
+      <div class="col-xs-1"><button type="button" class="btn btn-success">Paste</button></div>
+      <div class="col-xs-2"><input type="text" class="form-control" placeholder="From"></div>
+      <div class="col-xs-2" >
+        <div ng-controller="ElementsController as ec">
+        <select class="form-control" ng-model="format" ng-options="le.name for le in ec.lengthelements"></select>
         </div>
-    
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Length & area</a></li>
-            <li><a href="#">Volume</a></li>
-            <li><a href="#">Pressure</a></li>
-            <li><a href="#">Flow</a></li>
-            <li><a href="#">Temperature</a></li>
-            <li><a href="#">Currency</a></li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-<div class="container-fluid">
-  <div class="row">
-    
-  <div class="col-xs-1"><button type="button" class="btn btn-success">Paste</button></div>
-  <div class="col-xs-2"><input type="text" class="form-control" placeholder="From"></div>
-  <div class="col-xs-2">
-    <select class="form-control">
-      <option>centimeter</option>
-      <option>feet</option>
-      <option>inch</option>
-      <option>kilometer</option>
-      <option>meter</option>
-    </select>
+      </div>
+      <div class="col-xs-1"><center><h5>=</h5></center></div>
+      <div class="col-xs-2"><input type="text" class="form-control" placeholder="To" readonly></div>
+      <div class="col-xs-2">
+        <div ng-controller="ElementsController as ec">
+        <select class="form-control" ng-model="format" ng-options="le.name for le in ec.lengthelements"></select>
+        </div>
+      </div>
+      <div class="col-xs-1"><button type="button" class="btn btn-danger">Copy</button></div>
+    </div>
   </div>
-  <div class="col-xs-1"><center><h5>=</h5></center></div>
-  <div class="col-xs-2"><input type="text" class="form-control" placeholder="To" readonly></div>
-  <div class="col-xs-2">
-    <select class="form-control">
-      <option>centimeter</option>
-      <option>feet</option>
-      <option>inch</option>
-      <option>kilometer</option>
-      <option>meter</option>
-    </select>
-  </div>
-  <div class="col-xs-1"><button type="button" class="btn btn-danger">Copy</button></div>
-
-
-    
-  </div>
-</div> 
+  
 
   
   
