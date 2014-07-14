@@ -19,10 +19,10 @@
         <script type="text/javascript" src="app.js"></script>
 
   </head>
-  <body class="container">
+  <body class="container" ng-controller="PanelController as panel">
 
   
-  <nav class="navbar navbar-default" role="navigation" ng-controller="PanelController as panel">
+  <nav class="navbar navbar-default" role="navigation" >
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -38,40 +38,56 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li ng-class="{active:tab === 0}"><a href ng-click="tab = 0">Length</a></li>
-          <li ng-class="{active:tab === 1}"><a href ng-click="tab = 1">Area</a></li>
-          <li ng-class="{active:tab === 2}"><a href ng-click="tab = 2">Volume</a></li>
-          <li ng-class="{active:tab === 3}"><a href ng-click="tab = 3">Pressure</a></li>
-          <li ng-class="{active:tab === 4}"><a href ng-click="tab = 4">Flow</a></li>
-          <li ng-class="{active:tab === 5}"><a href ng-click="tab = 5">Temperature</a></li>
-          <li ng-class="{active:tab === 6}"><a href ng-click="tab = 6">Currency</a></li>
-        </ul>
+          <li ng-class="{active:panel.isSelected(0)}"><a href ng-click="panel.selectTab(0)">Length</a></li>
+          <li ng-class="{active:panel.isSelected(1)}"><a href ng-click="panel.selectTab(1)">Area</a></li>
+          <li ng-class="{active:panel.isSelected(2)}"><a href ng-click="panel.selectTab(2)">Volume</a></li>
+          <li ng-class="{active:panel.isSelected(3)}"><a href ng-click="panel.selectTab(3)">Pressure</a></li>
+          <li ng-class="{active:panel.isSelected(4)}"><a href ng-click="panel.selectTab(4)">Flow</a></li>
+          <li ng-class="{active:panel.isSelected(5)}"><a href ng-click="panel.selectTab(5)">Temperature</a></li>
+          <li ng-class="{active:panel.isSelected(6)}"><a href ng-click="panel.selectTab(6)">Currency</a></li>
+        </ul>        
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
 
-  <div class="container-fluid" ng-show="tab === 0">
-    <div class="row">    
-      <div class="col-xs-1"><button type="button" class="btn btn-success">Paste</button></div>
-      <div class="col-xs-2"><input type="text" class="form-control" placeholder="From"></div>
-      <div class="col-xs-2" >
+  <div class="container-fluid" ng-show="panel.isSelected(0)">
+    <div class="calc">
+    <div class="row" ng-repeat="rowindex in panel.getRows(panel.tab) track by $index" id="$index">    
+      <div class="col-xs-3 col-sm-2 col-md-1"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-import"></span> Paste</button></div>
+      <div class="col-xs-9 col-sm-5 col-md-2"><input type="text" class="form-control" placeholder="Enter value"></div>
+      <div class="col-xs-12 col-sm-5 col-md-2">
         <div ng-controller="ElementsController as ec">
         <select class="form-control" ng-model="format" ng-options="le.name for le in ec.lengthelements"></select>
         </div>
       </div>
-      <div class="col-xs-1"><center><h5>=</h5></center></div>
-      <div class="col-xs-2"><input type="text" class="form-control" placeholder="To" readonly></div>
-      <div class="col-xs-2">
+      <div class="col-xs-12 col-sm-12 col-md-1"><center><h5>=</h5></center></div>
+      <div class="col-xs-12 col-sm-5 col-md-2"><input type="text" class="form-control" placeholder="Result" readonly></div>
+      <div class="col-xs-9 col-sm-5 col-md-2">
         <div ng-controller="ElementsController as ec">
         <select class="form-control" ng-model="format" ng-options="le.name for le in ec.lengthelements"></select>
         </div>
       </div>
-      <div class="col-xs-1"><button type="button" class="btn btn-danger">Copy</button></div>
+      <div class="col-xs-3 col-sm-2 col-md-1"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-export"></span> Copy</button></div>
+      <div class="col-xs-12 col-sm-12 col-md-1"><button type="button" class="btn btn-danger" ng-click="panel.removeRow(row.$index)"><span class="glyphicon glyphicon-trash"></span> Row</button></div>
     </div>
+  `</div>
+    
+    <div class="row">
+      <div class="col-xs-9 col-sm-10 col-md-11"></div>
+      <div class="col-xs-3 col-sm-2 col-md-1">
+        <button type="button" class="btn btn-success" ng-click="panel.addrow()"><span class="glyphicon glyphicon-plus-sign"></span> Row</button>
+      </div>
+    </div> 
   </div>
+  {{panel.panelrows[0]}}
+  {{panel.panelrows[1]}}
+  {{panel.panelrows[2]}}
+  {{panel.panelrows[3]}}
+  {{panel.panelrows[4]}}
+  {{panel.panelrows[5]}}
   
 
-  
+
   
 
 
