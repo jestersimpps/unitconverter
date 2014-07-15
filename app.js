@@ -16,33 +16,46 @@
     
     var rows =
     [
-	[0],[0],[0],[0],[0],[0],[0]
+	[{value: 3.14156, from: 4, result: 123456, to: 1 }],
+	[{value: 3.14156, from: 0, result: 123456, to: 0 }],
+	[{value: 3.14156, from: 0, result: 123456, to: 0 }],
+	[{value: 3.14156, from: 0, result: 123456, to: 0 }],
+	[{value: 3.14156, from: 0, result: 123456, to: 0 }],
+	[{value: 3.14156, from: 0, result: 123456, to: 0 }],
+	[{value: 3.14156, from: 0, result: 123456, to: 0 }]	
+
     ];
     
     
-    app.controller('ElementsController',function(){
-	
-	this.lengthelements = lengths;
-    
-    });  
-    
+
 
 
     app.controller("PanelController",function(){
 	
 	this.tab = 0;
 	this.panelrows = rows;
+	this.lengthelements = lengths;
 	
+	this.counter = 0;
 	
 	this.selectTab = function(setTab) { this.tab = setTab; };
 	this.isSelected = function(checkTab) { return this.tab === checkTab; };
 	this.getRows = function(Tab){ return this.panelrows[this.tab];};
-	this.removeRow = function(Row){ this.getRows(this.tab).splice(this.getRows(this.tab).indexOf(Row),1); };
+	this.removeRow = function(index)
+	{
+	    this.panelrows[this.tab].splice(index,1);
+	
+	};
 	
 	
 	this.addrow = function()
 	{
-	    this.panelrows[this.tab].push(this.panelrows[this.tab].length);  
+	    this.panelrows[this.tab].push({value: '', from: 0, result: '', to: 0 });  
+	};
+	
+	this.changeValue= function(row,val) {
+	    
+	    this.panelrows[this.tab][row].value = val;
 	};
 	
     });

@@ -8,6 +8,7 @@
 
         <!-- stylesheets -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        
         <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="style.css">
             
@@ -17,6 +18,7 @@
         
         <!-- JavaScript project -->        
         <script type="text/javascript" src="app.js"></script>
+
 
   </head>
   <body class="container" ng-controller="PanelController as panel">
@@ -52,25 +54,38 @@
 
   <div class="container-fluid" ng-show="panel.isSelected(0)">
     <div class="calc">
-    <div class="row" ng-repeat="rowindex in panel.getRows(panel.tab) track by $index" id="$index">    
-      <div class="col-xs-3 col-sm-2 col-md-1"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-import"></span> Paste</button></div>
-      <div class="col-xs-3 col-sm-5 col-md-2"><input type="text" class="form-control" placeholder="Enter value"></div>
-      <div class="col-xs-3 col-sm-3 col-md-2">
-        <div ng-controller="ElementsController as ec">
-        <select class="form-control" ng-model="format" ng-options="le.name for le in ec.lengthelements"></select>
+      <div class="row" ng-repeat="row in panel.getRows(panel.tab) track by $index">    
+        <div class="col-xs-3 col-sm-2 col-md-1"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-import"></span> Paste</button></div>
+        <div class="col-xs-3 col-sm-5 col-md-2">
+          
+          <input type="text" class="form-control" ng-model="form_value" placeholder="Enter value" ng-change="panel.changeValue($index,form_value)"  value={{row.value}}>
+            {{form_value}}
+            {{panel.counter}}
+            {{$index}}
+            
         </div>
-      </div>
-      <div class="col-xs-3 col-sm-1 col-md-1"><center><h5>=</h5></center></div>
-      <div class="col-xs-3 col-sm-2 col-md-1"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-export"></span> Copy</button></div>
-      <div class="col-xs-3 col-sm-5 col-md-2"><input type="text" class="form-control" placeholder="Result" readonly></div>
-      <div class="col-xs-3 col-sm-3 col-md-2">
-        <div ng-controller="ElementsController as ec">
-        <select class="form-control" ng-model="format" ng-options="le.name for le in ec.lengthelements"></select>
+        <div class="col-xs-3 col-sm-3 col-md-2">
+          
+          <select class="form-control" ng-model="form_from" ng-options="le.name for le in panel.lengthelements" ng-init="form_from=panel.lengthelements[row.from]">
+            
+          </select>
+          
+          {{formfrom}}
         </div>
+        <div class="col-xs-3 col-sm-1 col-md-1"><center><h5>=</h5></center></div>
+        <div class="col-xs-3 col-sm-2 col-md-1"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-export"></span> Copy</button></div>
+        <div class="col-xs-3 col-sm-5 col-md-2"><input type="text" class="form-control" placeholder="Result" readonly value={{row.result}}></div>
+        <div class="col-xs-3 col-sm-3 col-md-2">
+          
+          <select class="form-control" ng-model="form_to" ng-options="le.name for le in panel.lengthelements" ng-init="form_to=panel.lengthelements[row.to]">
+            
+          </select>
+          
+        </div>
+          <div class="col-xs-3 col-sm-2 col-md-1"><button type="button" class="btn btn-danger" ng-click="panel.removeRow($index)"><span class="glyphicon glyphicon-trash"></span> Row</button></div>
       </div>
-        <div class="col-xs-3 col-sm-2 col-md-1"><button type="button" class="btn btn-danger" ng-click="panel.removeRow(row.$index)"><span class="glyphicon glyphicon-trash"></span> Row</button></div>
+     
     </div>
-  `</div>
     
     <div class="row">
       <div class="col-xs-9 col-sm-10 col-md-11"></div>
@@ -80,11 +95,7 @@
     </div> 
   </div>
   {{panel.panelrows[0]}}
-  {{panel.panelrows[1]}}
-  {{panel.panelrows[2]}}
-  {{panel.panelrows[3]}}
-  {{panel.panelrows[4]}}
-  {{panel.panelrows[5]}}
+
   
 
 
