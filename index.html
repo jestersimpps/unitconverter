@@ -19,6 +19,7 @@
         
         <!-- JavaScript project -->        
         <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="data.js"></script>
 
 
   </head>
@@ -53,10 +54,11 @@
     </div><!-- /.container-fluid -->
   </nav>
 
-  <div class="container-fluid" ng-show="panel.isSelected(0)">
+  <div class="container-fluid" ng-show="panel.isSelected(panel.tab)">
     <div class="calc">
       <div class="row" ng-repeat="row in panel.getRows(panel.tab) track by $index">
-        
+        {{row.from}}
+        {{row.to}}
         <div class="col-xs-3 col-sm-2 col-md-1">
           <button type="button"
                   class="btn btn-primary">
@@ -76,9 +78,9 @@
         <div class="col-xs-3 col-sm-3 col-md-2">
           <select class="form-control"
                   ng-model="form_from"
-                  ng-options="le.name for le in panel.lengthelements"
+                  ng-options="le.name for le in panel.panelunits[panel.tab]"
                   ng-change="panel.changeFrom($index,form_from)"
-                  ng-init="form_from=panel.lengthelements[row.from]">
+                  ng-init="form_from=options[row.from]">
           </select>
         </div>
         
@@ -103,9 +105,9 @@
         <div class="col-xs-3 col-sm-3 col-md-2">
           <select class="form-control"
                   ng-model="form_to"
-                  ng-options="le.name for le in panel.lengthelements"
+                  ng-options="le.name for le in panel.panelunits[panel.tab]"
                   ng-change="panel.changeTo($index,form_to)"
-                  ng-init="form_to=panel.lengthelements[row.to]">
+                  ng-init="form_to=options[row.to]">
           </select>
         </div>
         
@@ -118,7 +120,7 @@
           </div>
       </div>
      
-    </div>
+    </div> <!-- /.calc -->
     
     <div class="row">
       
@@ -131,10 +133,23 @@
         </button>
       </div>
       
-    </div> 
+    </div> <!-- /.row -->
   </div>
   {{panel.panelrows[0]}}
-
+  <br>
+  {{panel.panelrows[1]}}
+    <br>
+  {{panel.panelrows[2]}}
+    <br>
+  {{panel.panelrows[3]}}
+    <br>
+  {{panel.panelrows[4]}}
+    <br>
+  {{panel.panelrows[5]}}
+    <br>
+  {{panel.panelrows[6]}}
+    <br>
+  {{panel.panelrows[7]}}
   
 
 
