@@ -57,8 +57,7 @@
   <div class="container-fluid" ng-show="panel.isSelected(panel.tab)">
     <div class="calc">
       <div class="row" ng-repeat="row in panel.getRows(panel.tab) track by $index">
-        {{row.from}}
-        {{row.to}}
+
         <div class="col-xs-3 col-sm-2 col-md-1">
           <button type="button"
                   class="btn btn-primary">
@@ -80,10 +79,12 @@
                   ng-model="form_from"
                   ng-options="le.name for le in panel.panelunits[panel.tab]"
                   ng-change="panel.changeFrom($index,form_from)"
-                  ng-init="form_from=options[row.from]">
+                  >
           </select>
+          
         </div>
-        
+        {{panel.get_from(row.from)}}
+        {{panel.get_from(row.to)}}
         <div class="col-xs-3 col-sm-1 col-md-1"><center><h5>=</h5></center></div>
         
         <div class="col-xs-3 col-sm-2 col-md-1">
@@ -107,7 +108,7 @@
                   ng-model="form_to"
                   ng-options="le.name for le in panel.panelunits[panel.tab]"
                   ng-change="panel.changeTo($index,form_to)"
-                  ng-init="form_to=options[row.to]">
+                  >
           </select>
         </div>
         

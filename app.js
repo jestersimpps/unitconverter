@@ -19,6 +19,8 @@
 	this.panelrows = rows;
 	this.panelunits = units;
 	
+
+	
 	this.counter = 0;
 	
 	this.selectTab = function(setTab) { this.tab = setTab; };
@@ -72,17 +74,22 @@
 	    conv_from = this.panelunits[this.tab][from_index].conv;
 	    conv_to = this.panelunits[this.tab][to_index].conv;
 	    
+	    //if not temperature
 	    this.panelrows[this.tab][row].result = (value/conv_to)*conv_from;
+	    
+	    //if temperature
+	    
 	};
 	
 	this.get_from= function(index) {
 	    
-	    return this.panelunits[this.tab][this.panelrows[this.tab][index].from].name;
+	    return this.panelunits[this.tab][index].name;
 	}
 	this.get_to= function(index) {
 	    
-	    return this.panelunits[this.tab][this.panelrows[this.tab][index].to].name;
+	    return this.panelunits[this.tab][index].name;
 	}
+	
 	
     });
     
