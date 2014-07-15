@@ -79,12 +79,14 @@
                   ng-model="form_from"
                   ng-options="le.name for le in panel.panelunits[panel.tab]"
                   ng-change="panel.changeFrom($index,form_from)"
+                  
                   >
           </select>
           
+        <div class="invisible">{{form_from=panel.get_from(row.from)}}</div>
         </div>
-        {{panel.get_from(row.from)}}
-        {{panel.get_from(row.to)}}
+        
+        
         <div class="col-xs-3 col-sm-1 col-md-1"><center><h5>=</h5></center></div>
         
         <div class="col-xs-3 col-sm-2 col-md-1">
@@ -110,6 +112,8 @@
                   ng-change="panel.changeTo($index,form_to)"
                   >
           </select>
+          
+          <div class="invisible">{{form_to=panel.get_to(row.to)}}</div>
         </div>
         
           <div class="col-xs-3 col-sm-2 col-md-1">
@@ -136,21 +140,7 @@
       
     </div> <!-- /.row -->
   </div>
-  {{panel.panelrows[0]}}
-  <br>
-  {{panel.panelrows[1]}}
-    <br>
-  {{panel.panelrows[2]}}
-    <br>
-  {{panel.panelrows[3]}}
-    <br>
-  {{panel.panelrows[4]}}
-    <br>
-  {{panel.panelrows[5]}}
-    <br>
-  {{panel.panelrows[6]}}
-    <br>
-  {{panel.panelrows[7]}}
+
   
 
 

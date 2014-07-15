@@ -56,3 +56,9 @@
     border: solid 0px;
     background: #eee;
 }
+
+.invisible {
+    
+        display: none;
+    visibility: hidden;
+}

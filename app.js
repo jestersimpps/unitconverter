@@ -12,6 +12,7 @@
 	[{value: '', from: 0, result: '', to: 0 }]
     ];
 
+    
 
     app.controller("PanelController",function(){
 	
@@ -83,11 +84,11 @@
 	
 	this.get_from= function(index) {
 	    
-	    return this.panelunits[this.tab][index].name;
+	    return this.panelunits[this.tab][index];
 	}
 	this.get_to= function(index) {
 	    
-	    return this.panelunits[this.tab][index].name;
+	    return this.panelunits[this.tab][index];
 	}
 	
 	
