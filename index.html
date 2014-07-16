@@ -22,6 +22,7 @@
         <!-- JavaScript project -->        
         <script type="text/javascript" src="app.js"></script>
         <script type="text/javascript" src="data.js"></script>
+        <script type="text/javascript" src="flow.js"></script>
         
   </head>
   <body class="container" ng-controller="PanelController as panel">
@@ -55,7 +56,7 @@
     </div><!-- /.container-fluid -->
   </nav>
 
-  <div class="container-fluid" ng-show="panel.isSelected(panel.tab)">
+  <div class="container-fluid" ng-show="panel.isSelected(panel.tab)" ng-hide="panel.tab===5 || panel.tab===6">
     <div class="calc">
       <div class="row" ng-repeat="row in panel.getRows(panel.tab) track by $index">
 <!--
@@ -156,6 +157,34 @@
     </div> <!-- /.row -->
   </div>
   
+  
+<br>
 
+
+<div class="panel panel-default" ng-show="panel.tab===4">
+  <div class="panel-heading">
+    Diameter Velocity & Flow calculations
+  </div>
+  <div class="panel-body">
+    <a href="http://www.1728.org/flowrate.htm" target="_blank" type="button" class="btn btn-primary" >Open link</a>
+  </div>
+</div>
+
+  
+
+<div class="panel panel-default" ng-show="panel.tab===6">
+  <div class="panel-heading">
+    Xe Currency conversions
+  </div>
+  <div class="panel-body">
+    <a href="http://www.xe.com/" target="_blank" type="button" class="btn btn-primary" >Open link</a>
+  </div>
+</div>
+
+  
+  
+  
+  
+<script type="text/javascript" src="flow.js"></script>
   </body>
 </html>
