@@ -20,7 +20,7 @@
 	this.panelrows = rows;
 	this.panelunits = units;
 	
-
+	
 	
 	this.counter = 0;
 	
@@ -35,6 +35,7 @@
 	
 	    
 	};
+	
 	
 	
 	this.addrow = function()
@@ -91,10 +92,13 @@
 	    return this.panelunits[this.tab][index];
 	}
 	
-	
+
     });
     
+
     
 
     
 })();
+
+

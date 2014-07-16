@@ -156,7 +156,10 @@
 	{name: 'degree fahrenheit', conv: 2},
 	{name: 'degree rankine' , conv: 3 },
 	{name: 'degree reaumur', conv: 4},
-	{name: 'kelvin', conv:(-272.15)}]
+	{name: 'kelvin', conv:(-272.15)}],
+	
+	//currency
+	[{name: 'WIP ', conv: 1}]
 	
 	
 	
