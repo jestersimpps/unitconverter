@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!--https://github.com/jestersimpps/unitconverter-->
+<!--jestersimpps@gmail.com-->
+
 <html lang="en" ng-app="uc">
   <head>
     <meta charset="utf-8">
@@ -28,163 +31,170 @@
   <body class="container" ng-controller="PanelController as panel">
 
   
-  <nav class="navbar navbar-default" role="navigation" >
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Convert:</a>
-      </div>
+	  <nav class="navbar navbar-default" role="navigation" >
+	    <div class="container-fluid">
+	      <!-- Brand and toggle get grouped for better mobile display -->
+	      <div class="navbar-header">
+	        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	          <span class="sr-only">Toggle navigation</span>
+	          <span class="icon-bar"></span>
+	          <span class="icon-bar"></span>
+	          <span class="icon-bar"></span>
+	        </button>
+	        <a class="navbar-brand" href="#">Convert:</a>
+	      </div>
+	  
+	      <!-- Collect the nav links, forms, and other content for toggling -->
+	      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	        <ul class="nav navbar-nav">
+	          <li ng-class="{active:panel.isSelected(0)}"><a href ng-click="panel.selectTab(0)">Length</a></li>
+	          <li ng-class="{active:panel.isSelected(1)}"><a href ng-click="panel.selectTab(1)">Area</a></li>
+	          <li ng-class="{active:panel.isSelected(2)}"><a href ng-click="panel.selectTab(2)">Volume</a></li>
+	          <li ng-class="{active:panel.isSelected(3)}"><a href ng-click="panel.selectTab(3)">Pressure</a></li>
+	          <li ng-class="{active:panel.isSelected(4)}"><a href ng-click="panel.selectTab(4)">Flow</a></li>
+	<!--      <li ng-class="{active:panel.isSelected(5)}"><a href ng-click="panel.selectTab(5)">Temperature</a></li> -->
+	          <li ng-class="{active:panel.isSelected(6)}"><a href ng-click="panel.selectTab(6)">Currency</a></li>
+	        </ul>        
+	      </div><!-- /.navbar-collapse -->
+	    </div><!-- /.container-fluid -->
+	  </nav>
+	
+	  <div class="container-fluid" ng-show="panel.isSelected(panel.tab)" ng-hide="panel.tab===5 || panel.tab===6">
+	    <div class="calc">
+	      <div class="row" ng-repeat="row in panel.getRows(panel.tab) track by $index">
+	<!--
+	        <div class="col-xs-3 col-sm-2 col-md-1">
+	          <button type="button"
+	                  class="btn btn-primary">
+	            <span class="glyphicon glyphicon-import"></span> Paste
+	          </button>
+	        </div>
+	-->        
+	        <div class="col-xs-4 col-sm-5 col-md-3">    
+	          <input type="text"
+	                 class="form-control"
+	                 ng-model="form_value"
+	                 placeholder="Enter value"
+	                 ng-change="panel.changeValue($index,form_value)"
+	                 ng-value="form_value=row.value"
+	                 onClick="this.select();"
+	                 data-toggle="tooltip"
+	                 data-placement="bottom"
+	                 title="Click and press Ctrl-V to paste">
+	        </div>
+	        
+	        <div class="col-xs-4 col-sm-5 col-md-2">
+	          <select class="form-control"
+	                  ng-model="form_from"
+	                  ng-options="le.name for le in panel.panelunits[panel.tab]"
+	                  ng-change="panel.changeFrom($index,form_from)"
+	                  data-toggle="tooltip"
+	                  data-placement="bottom"
+	                  title="Select unit to convert FROM"
+	                  >
+	          </select>
+	          
+	        <div class="invisible">{{form_from=panel.get_from(row.from)}}</div>
+	        </div>
+	        
+	        
+	        <div class="col-xs-4 col-sm-2 col-md-1">
+	                <button type="button"
+	                class="btn btn-default"
+	                disabled="disabled">
+	                <span class="glyphicon glyphicon-arrow-right"></span> 
+	        </button></div>
+	        
+	<!--        
+	        <div class="col-xs-3 col-sm-2 col-md-1" id="toppathwrap">
+	          <button type="button"
+	                  class="btn btn-primary"
+	                  ng-click=>
+	                  
+	            <span class="glyphicon glyphicon-export"></span> Copy
+	          </button>
+	        </div>
+	-->       
+	        <div class="col-xs-4 col-sm-5 col-md-3">
+	          <input type="text"
+	                 class="form-control"
+	                 value ="{{row.result}}"
+	                 placeholder="Result"
+	                 onClick="this.select();"
+	                 readonly
+	                 data-toggle="tooltip"
+	                 data-placement="bottom"
+	                 title="Click and press Ctrl-C to copy"
+	                 >
+	        </div>
+	        
+	        <div class="col-xs-4 col-sm-5 col-md-2">
+	          <select class="form-control"
+	                  ng-model="form_to"
+	                  ng-options="le.name for le in panel.panelunits[panel.tab]"
+	                  ng-change="panel.changeTo($index,form_to)"
+	                  data-toggle="tooltip"
+	                  data-placement="bottom"
+	                  title="Select unit to convert TO">
+	          </select>
+	          
+	          <div class="invisible">{{form_to=panel.get_to(row.to)}}</div>
+	        </div>
+	        
+	          <div class="col-xs-4 col-sm-2 col-md-1">
+	            <button type="button"
+	                    class="btn btn-danger"
+	                    ng-click="panel.removeRow($index)">
+	              <span class="glyphicon glyphicon-trash"></span> Row
+	            </button>
+	          </div>
+	      </div>
+	     
+	    </div> <!-- /.calc -->
+	    
+	    <div class="row">
+	      
+	      <div class="col-xs-8 col-sm-10 col-md-11"></div>
+	      <div class="col-xs-4 col-sm-2 col-md-1">
+	        <button type="button"
+	                class="btn btn-success"
+	                ng-click="panel.addrow()">
+	          <span class="glyphicon glyphicon-plus-sign"></span> Row
+	        </button>
+	      </div>
+	      
+	    </div> <!-- /.row -->
+	  </div>
   
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li ng-class="{active:panel.isSelected(0)}"><a href ng-click="panel.selectTab(0)">Length</a></li>
-          <li ng-class="{active:panel.isSelected(1)}"><a href ng-click="panel.selectTab(1)">Area</a></li>
-          <li ng-class="{active:panel.isSelected(2)}"><a href ng-click="panel.selectTab(2)">Volume</a></li>
-          <li ng-class="{active:panel.isSelected(3)}"><a href ng-click="panel.selectTab(3)">Pressure</a></li>
-          <li ng-class="{active:panel.isSelected(4)}"><a href ng-click="panel.selectTab(4)">Flow</a></li>
-          <li ng-class="{active:panel.isSelected(5)}"><a href ng-click="panel.selectTab(5)">Temperature</a></li>
-          <li ng-class="{active:panel.isSelected(6)}"><a href ng-click="panel.selectTab(6)">Currency</a></li>
-        </ul>        
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
+  
+	<br>
 
-  <div class="container-fluid" ng-show="panel.isSelected(panel.tab)" ng-hide="panel.tab===5 || panel.tab===6">
-    <div class="calc">
-      <div class="row" ng-repeat="row in panel.getRows(panel.tab) track by $index">
-<!--
-        <div class="col-xs-3 col-sm-2 col-md-1">
-          <button type="button"
-                  class="btn btn-primary">
-            <span class="glyphicon glyphicon-import"></span> Paste
-          </button>
-        </div>
--->        
-        <div class="col-xs-4 col-sm-5 col-md-3">    
-          <input type="text"
-                 class="form-control"
-                 ng-model="form_value"
-                 placeholder="Enter value"
-                 ng-change="panel.changeValue($index,form_value)"
-                 ng-value="form_value=row.value"
-                 onClick="this.select();"
-                 data-toggle="tooltip"
-                 data-placement="bottom"
-                 title="Click and press Ctrl-V to paste">
-        </div>
-        
-        <div class="col-xs-4 col-sm-5 col-md-2">
-          <select class="form-control"
-                  ng-model="form_from"
-                  ng-options="le.name for le in panel.panelunits[panel.tab]"
-                  ng-change="panel.changeFrom($index,form_from)"
-                  data-toggle="tooltip"
-                  data-placement="bottom"
-                  title="Select unit to convert FROM"
-                  >
-          </select>
-          
-        <div class="invisible">{{form_from=panel.get_from(row.from)}}</div>
-        </div>
-        
-        
-        <div class="col-xs-4 col-sm-2 col-md-1"><center><h5>=</h5></center></div>
-<!--        
-        <div class="col-xs-3 col-sm-2 col-md-1" id="toppathwrap">
-          <button type="button"
-                  class="btn btn-primary"
-                  ng-click=>
-                  
-            <span class="glyphicon glyphicon-export"></span> Copy
-          </button>
-        </div>
--->       
-        <div class="col-xs-4 col-sm-5 col-md-3">
-          <input type="text"
-                 class="form-control"
-                 value ="{{row.result}}"
-                 placeholder="Result"
-                 onClick="this.select();"
-                 readonly
-                 data-toggle="tooltip"
-                 data-placement="bottom"
-                 title="Click and press Ctrl-C to copy"
-                 >
-        </div>
-        
-        <div class="col-xs-4 col-sm-5 col-md-2">
-          <select class="form-control"
-                  ng-model="form_to"
-                  ng-options="le.name for le in panel.panelunits[panel.tab]"
-                  ng-change="panel.changeTo($index,form_to)"
-                  data-toggle="tooltip"
-                  data-placement="bottom"
-                  title="Select unit to convert TO">
-          </select>
-          
-          <div class="invisible">{{form_to=panel.get_to(row.to)}}</div>
-        </div>
-        
-          <div class="col-xs-4 col-sm-2 col-md-1">
-            <button type="button"
-                    class="btn btn-danger"
-                    ng-click="panel.removeRow($index)">
-              <span class="glyphicon glyphicon-trash"></span> Row
-            </button>
+	
+	<div class="panel panel-default" ng-show="panel.tab===4">
+	  <div class="panel-heading">
+	    Diameter Velocity & Flow calculations
+	  </div>
+	  <div class="panel-body">
+	    <a href="http://www.1728.org/flowrate.htm" target="_blank" type="button" class="btn btn-primary" >Open link</a>
+	  </div>
+	</div>
+	
+	  
+	
+	<div class="panel panel-default" ng-show="panel.tab===6">
+	  <div class="panel-heading">
+	    
+
+			<A HREF="http://www.xe.com/">Xe Currency conversions</a>
+
+	  </div>
+	  <div class="panel-body">
+	<IFRAME SRC="http://www.xe.com/ecc/input.cgi?Template=se&" WIDTH=100% HEIGHT=180 NAME="Currency" FRAMEBORDER=0 SCROLLING=NO>
+    	<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0 BGCOLOR=#F0C090><TR><TD><TABLE WIDTH=100% CELLSPACING=1 CELLPADDING=0 BORDER=1><TR><TD WIDTH=15% BGCOLOR=#000000 ALIGN=CENTER VALIGN=MIDDLE ALIGN=CENTER><A HREF="javascript:CurrencyPopup('')"><IMG SRC="http://www.xe.com/currency/illegal2copy.gif" HEIGHT=45 WIDTH=45 BORDER=0 ALT="UCC" ALIGN=TEXTTOP></A></TD><TD bgcolor=#FFFFC0 VALIGN=MIDDLE><TABLE CELLPADDING=3 CELLSPACING=0 BORDER=0><TR><TD VALIGN=MIDDLE>&nbsp;&nbsp;&nbsp;</TD><TD><FONT COLOR=#000000 face="Arial,Helvetica"><FONT SIZE=+1><b>Shopper's Currency Converter</B>&#153; </FONT><FONT SIZE=-1>by XE.com<BR><B>Your browser does not support embedded frames. <A HREF="javascript:CurrencyPopup('')">Click here</A> to pop open a floating Shopper's Currency Converter&#153; window.</B></FONT></FONT></TD></TR></TABLE></TD></TR></TABLE></TD></TR></TABLE>
+ 	</IFRAME>
           </div>
-      </div>
-     
-    </div> <!-- /.calc -->
-    
-    <div class="row">
-      
-      <div class="col-xs-8 col-sm-10 col-md-11"></div>
-      <div class="col-xs-4 col-sm-2 col-md-1">
-        <button type="button"
-                class="btn btn-success"
-                ng-click="panel.addrow()">
-          <span class="glyphicon glyphicon-plus-sign"></span> Row
-        </button>
-      </div>
-      
-    </div> <!-- /.row -->
-  </div>
-  
-  
-<br>
-
-
-<div class="panel panel-default" ng-show="panel.tab===4">
-  <div class="panel-heading">
-    Diameter Velocity & Flow calculations
-  </div>
-  <div class="panel-body">
-    <a href="http://www.1728.org/flowrate.htm" target="_blank" type="button" class="btn btn-primary" >Open link</a>
-  </div>
-</div>
+	</div>
 
   
-
-<div class="panel panel-default" ng-show="panel.tab===6">
-  <div class="panel-heading">
-    Xe Currency conversions
-  </div>
-  <div class="panel-body">
-    <a href="http://www.xe.com/" target="_blank" type="button" class="btn btn-primary" >Open link</a>
-  </div>
-</div>
-
-  
-  
-  
-  
-<script type="text/javascript" src="flow.js"></script>
   </body>
 </html>
