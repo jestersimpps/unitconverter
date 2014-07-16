@@ -72,7 +72,11 @@
                  ng-model="form_value"
                  placeholder="Enter value"
                  ng-change="panel.changeValue($index,form_value)"
-                 ng-value="form_value=row.value">
+                 ng-value="form_value=row.value"
+                 onClick="this.select();"
+                 data-toggle="tooltip"
+                 data-placement="bottom"
+                 title="Click and press Ctrl-V to paste">
         </div>
         
         <div class="col-xs-4 col-sm-5 col-md-2">
@@ -80,7 +84,9 @@
                   ng-model="form_from"
                   ng-options="le.name for le in panel.panelunits[panel.tab]"
                   ng-change="panel.changeFrom($index,form_from)"
-                  
+                  data-toggle="tooltip"
+                  data-placement="bottom"
+                  title="Select unit to convert FROM"
                   >
           </select>
           
@@ -88,7 +94,7 @@
         </div>
         
         
-        <div class="col-xs-4 col-sm-1 col-md-1"><center><h5>=</h5></center></div>
+        <div class="col-xs-4 col-sm-2 col-md-1"><center><h5>=</h5></center></div>
 <!--        
         <div class="col-xs-3 col-sm-2 col-md-1" id="toppathwrap">
           <button type="button"
@@ -104,7 +110,11 @@
                  class="form-control"
                  value ="{{row.result}}"
                  placeholder="Result"
-                 ng-click-select
+                 onClick="this.select();"
+                 readonly
+                 data-toggle="tooltip"
+                 data-placement="bottom"
+                 title="Click and press Ctrl-C to copy"
                  >
         </div>
         
@@ -113,7 +123,9 @@
                   ng-model="form_to"
                   ng-options="le.name for le in panel.panelunits[panel.tab]"
                   ng-change="panel.changeTo($index,form_to)"
-                  >
+                  data-toggle="tooltip"
+                  data-placement="bottom"
+                  title="Select unit to convert TO">
           </select>
           
           <div class="invisible">{{form_to=panel.get_to(row.to)}}</div>

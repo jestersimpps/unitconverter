@@ -101,4 +101,7 @@
     
 })();
 
+$(function() {
+    $('.form-control').tooltip();
+});
 
