@@ -58,7 +58,7 @@
 	{name: 'dekaliter', conv: 10},
 	{name: 'fluid dram', conv: 0.003696691195313},
 	{name: 'fluid ounce (UK)', conv: 0.0284130625},
-	{name: 'gallon (fluid)', conv: 3.785411784},
+	{name: 'gallon (US)', conv: 3.785411784},
 	{name: 'gallon (UK)', conv: 4.54609},
 	{name: 'gill', conv: 0.11829411825},	
 	{name: 'hectoliter', conv: 100},
@@ -151,12 +151,29 @@
 	{name: 'kilogram/hour (gasoline at 15.5C)', conv: 0.000000376},
 	{name: 'kilogram/day (gasoline at 15.5C) ', conv: 0.000000016}],
 	
-	//temperature
-	[{name: 'degree celcius ', conv: 1},
-	{name: 'degree fahrenheit', conv: 2},
-	{name: 'degree rankine' , conv: 3 },
-	{name: 'degree reaumur', conv: 4},
-	{name: 'kelvin', conv:(-272.15)}],
+	//mass
+	[{name: 'atomic mass unit ', conv:1.6605402E-24 },
+	{name: 'carat(metric)', conv: 0.2 },
+	{name: 'cental' , conv: 45359.237  },
+	{name: 'centigram', conv: 0.01 },
+	{name: 'dekagram', conv: 10 },
+	{name: 'dram' , conv: 1.771845195312  },
+	{name: 'grain', conv: 0.06479891 },
+	{name: 'gram', conv:1 },
+	{name: 'hundredweight' , conv: 50802.34544  },
+	{name: 'kilogram', conv: 1000 },
+	{name: 'microgram', conv: 0.000001 },
+	{name: 'milligram' , conv: 0.001 },
+	{name: 'newton', conv: 101.9716212978 },
+	{name: 'ounce' , conv: 28.349523125},
+	{name: 'pennyweight', conv: 1.55517384 },
+	{name: 'pound', conv: 453.59237 },
+	{name: 'quarter' , conv: 12700.58636  },
+	{name: 'stone', conv: 6350.29318 },
+	{name: 'ton (UK)', conv: 1016046.9088 },
+	{name: 'ton (US)' , conv: 907184.74  },
+	{name: 'tonne', conv: 1000000 },
+	{name: 'troy ounce', conv: 31.1034768 }],
 	
 	//currency
 	[{name: 'WIP ', conv: 1}]
@@ -165,4 +182,3 @@
 	
 
     ];
-
