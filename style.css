@@ -34,6 +34,11 @@
     padding:  2px;
     margin: 0px;
 }
+.col-xs-8 {
+    
+    padding:  2px;
+    margin: 0px;
+}
 .col-xs-5 {
     
     padding:  2px;
@@ -45,6 +50,10 @@
     margin: 0px;
 }
 .btn {
+    width: 100%;
+}
+
+.btn-group {
     width: 100%;
 }
 .container-fluid {
